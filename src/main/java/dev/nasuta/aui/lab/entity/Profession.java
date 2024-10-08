@@ -3,6 +3,7 @@ package dev.nasuta.aui.lab.entity;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,12 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Category implements Serializable {
+public class Profession implements Serializable {
     private String name;
 
-    private String description;
+    private int baseArmor;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Product> products;
+    @Builder.Default
+    private List<Character> characters = new ArrayList<>();
 }
