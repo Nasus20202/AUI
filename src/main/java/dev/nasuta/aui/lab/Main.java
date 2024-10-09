@@ -2,7 +2,7 @@ package dev.nasuta.aui.lab;
 
 import dev.nasuta.aui.lab.entity.*;
 import dev.nasuta.aui.lab.dto.*;
-import dev.nasuta.aui.lab.entity.Character;
+import dev.nasuta.aui.lab.entity.Product;
 
 import java.io.*;
 import java.util.Collection;
@@ -12,80 +12,85 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Collectors;
 
 public class  Main {
-    final static String fileName = "characters.dat";
+    final static String fileName = "products.dat";
     final static int threadCount = Runtime.getRuntime().availableProcessors();
     final static int threadTimeout = 1000;
 
     public static void main(String[] args) {
+        // Task 2
         System.out.println("2.");
 
-        var professions = List.of(
-                Profession.builder().name("Warrior").baseArmor(100).build(),
-                Profession.builder().name("Archer").baseArmor(75).build(),
-                Profession.builder().name("Mage").baseArmor(25).build(),
-                Profession.builder().name("Rogue").baseArmor(50).build()
+        var categories = List.of(
+                Category.builder().name("Fruits").description("Fresh and tasty fruits").build(),
+                Category.builder().name("Vegetables").description("Healthy vegetables").build(),
+                Category.builder().name("Diary").description("Milk and yoghurts").build(),
+                Category.builder().name("Baking").description("Breads and buns").build()
         );
 
-        Character.builder().profession(professions.get(0)).name("Mark").level(10).build();
-        Character.builder().profession(professions.get(0)).name("Jones").level(22).build();
-        Character.builder().profession(professions.get(0)).name("Smith").level(35).build();
-        Character.builder().profession(professions.get(1)).name("Alice").level(15).build();
-        Character.builder().profession(professions.get(1)).name("Bob").level(30).build();
-        Character.builder().profession(professions.get(1)).name("Cathy").level(45).build();
-        Character.builder().profession(professions.get(2)).name("Charlie").level(5).build();
-        Character.builder().profession(professions.get(2)).name("David").level(27).build();
-        Character.builder().profession(professions.get(3)).name("Eve").level(20).build();
-        Character.builder().profession(professions.get(3)).name("Frank").level(40).build();
+        Product.builder().category(categories.get(0)).name("Apple").price(199).stock(68).build();
+        Product.builder().category(categories.get(0)).name("Pear").price(299).stock(21).build();
+        Product.builder().category(categories.get(1)).name("Carrot").price(199).stock(66).build();
+        Product.builder().category(categories.get(1)).name("Tomato").price(249).stock(123).build();
+        Product.builder().category(categories.get(1)).name("Potato").price(149).stock(72).build();
+        Product.builder().category(categories.get(2)).name("Milk").price(499).stock(16).build();
+        Product.builder().category(categories.get(2)).name("Yoghurt").price(299).stock(7).build();
+        Product.builder().category(categories.get(3)).name("Bread").price(599).stock(23).build();
+        Product.builder().category(categories.get(3)).name("Bun").price(99).stock(42).build();
 
-        printProfessions(professions);
+        printCategories(categories);
 
+        // Task 3
         System.out.println("\n3.");
 
-        var characters = professions.stream()
-                .map(Profession::getCharacters)
+        var products = categories.stream()
+                .map(Category::getProducts)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
-        characters.stream().forEach(System.out::println);
+        products.stream().forEach(System.out::println);
 
+        // Task 4
         System.out.println("\n4.");
 
-        characters.stream()
-                .filter(character -> character.getProfession().getBaseArmor() > 50)
-                .sorted(Comparator.comparingInt(Character::getLevel))
+        products.stream()
+                .filter(product -> product.getPrice() >= 200)
+                .sorted(Comparator.comparingInt(Product::getStock))
                 .forEach(System.out::println);
 
+        // Task 5
         System.out.println("\n5.");
 
-        var characterDtos = characters.stream()
-                .map(CharacterDto::new)
+        var productDtos = products.stream()
+                .map(ProductDto::new)
                 .sorted()
                 .toList();
-        characterDtos.stream().forEach(System.out::println);
+        productDtos.stream().forEach(System.out::println);
 
+        // Task 6
         System.out.println("\n6.");
 
         try {
             var fileOutputStream = new FileOutputStream(fileName);
             var objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(professions);
+            objectOutputStream.writeObject(categories);
             objectOutputStream.flush();
             objectOutputStream.close();
 
             var fileInputStream = new FileInputStream(fileName);
             var objectInputStream = new ObjectInputStream(fileInputStream);
-            var serializedCategories = (List<Profession>) objectInputStream.readObject();
+            var serializedCategories = (List<Category>) objectInputStream.readObject();
             objectInputStream.close();
 
-            printProfessions(serializedCategories);
+            printCategories(serializedCategories);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
+        // Task 7
         System.out.println("\n7.");
 
         var threadPool = new ForkJoinPool(threadCount);
-        Runnable job = () -> professions.parallelStream().forEach(profession ->
-            profession.getCharacters().forEach(character -> {
+        Runnable job = () -> categories.parallelStream().forEach(category ->
+            category.getProducts().forEach(product -> {
                 var threadName = Thread.currentThread().getName();
 
                 try {
@@ -94,18 +99,18 @@ public class  Main {
                     System.out.println(threadName + " | " + e.getMessage());
                 }
 
-                System.out.println(threadName + " | " + profession.getName() + " - " + character.getName());
+                System.out.println(threadName + " | " + category.getName() + " - " + product.getName());
             }));
 
         threadPool.submit(job);
         threadPool.close();
     }
 
-    private static void printProfessions(List<Profession> professions) {
-        professions.forEach(profession -> {
-            System.out.println("Profession: " + profession);
-            profession.getCharacters().forEach(character -> {
-                System.out.println("\tCharacter: " + character);
+    private static void printCategories(List<Category> categories) {
+        categories.forEach(category -> {
+            System.out.println("Category: " + category);
+            category.getProducts().forEach(product -> {
+                System.out.println("\tProduct: " + product);
             });
         });
     }

@@ -13,13 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Profession implements Serializable {
+public class Category implements Serializable {
     private String name;
 
-    private int baseArmor;
+    private String description;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Builder.Default
-    private List<Character> characters = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 }
