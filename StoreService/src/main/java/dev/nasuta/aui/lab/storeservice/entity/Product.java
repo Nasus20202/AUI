@@ -18,6 +18,7 @@ public class Product {
     @Id
     @ToString.Exclude
     @Builder.Default
+    @Column(name = "product_id")
     private UUID id = UUID.randomUUID();
 
     @Column(name = "name")

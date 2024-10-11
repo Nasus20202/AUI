@@ -20,11 +20,12 @@ public class Category {
     @Id
     @ToString.Exclude
     @Builder.Default
+    @Column(name = "category_id")
     private UUID id = UUID.randomUUID();
 
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "description")
     private String description;
 

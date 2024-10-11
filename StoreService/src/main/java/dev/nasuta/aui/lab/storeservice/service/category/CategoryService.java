@@ -9,9 +9,9 @@ import java.util.UUID;
 public interface CategoryService {
     List<Category> findAll();
 
-    Optional<Category> find(UUID id);
+    Optional<Category> findById(UUID id);
 
-    List<Category> findAllByName(String name);
+    List<Category> findByName(String name);
 
     void create(Category category);
 

@@ -20,7 +20,7 @@ public class DataInitializer {
     }
 
     @PostConstruct
-    public void init() {
+    public void insertExampleData() {
         if (categoryRepository.count() > 0) {
             return;
         }

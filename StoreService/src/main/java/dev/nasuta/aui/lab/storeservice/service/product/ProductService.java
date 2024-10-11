@@ -10,13 +10,13 @@ import java.util.UUID;
 public interface ProductService {
     List<Product> findAll();
 
-    Optional<Product> find(UUID id);
+    Optional<Product> findById(UUID id);
 
-    List<Product> findAllByCategory(Category category);
+    List<Product> findByCategory(Category category);
 
-    List<Product> findAllByName(String name);
+    List<Product> findByName(String name);
 
-    List<Product> findAllByNameAndCategory(String name, Category category);
+    List<Product> findByNameAndCategory(String name, Category category);
 
     void create(Product product);
 

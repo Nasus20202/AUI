@@ -26,12 +26,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> find(UUID id) {
+    public Optional<Category> findById(UUID id) {
         return categoryRepository.findById(id);
     }
 
     @Override
-    public List<Category> findAllByName(String name) {
+    public List<Category> findByName(String name) {
         return categoryRepository.findByNameIgnoreCase(name);
     }
 

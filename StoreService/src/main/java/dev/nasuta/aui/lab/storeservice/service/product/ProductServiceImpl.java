@@ -27,22 +27,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> find(UUID id) {
+    public Optional<Product> findById(UUID id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public List<Product> findAllByCategory(Category category) {
+    public List<Product> findByCategory(Category category) {
         return productRepository.findByCategory(category);
     }
 
     @Override
-    public List<Product> findAllByName(String name) {
+    public List<Product> findByName(String name) {
         return productRepository.findByNameIgnoreCase(name);
     }
 
     @Override
-    public List<Product> findAllByNameAndCategory(String name, Category category) {
+    public List<Product> findByNameAndCategory(String name, Category category) {
         return productRepository.findByNameIgnoreCaseAndCategory(name, category);
     }
 
