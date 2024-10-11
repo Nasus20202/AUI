@@ -9,16 +9,13 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class StoreGatewayApplication {
-    private final String storeGatewayHost;
     private final String categoryServiceUrl;
     private final String productServiceUrl;
 
     public StoreGatewayApplication(
-            @Value("${store.gateway.host}") String storeGatewayHost,
             @Value("${store.category-service.url}") String categoryServiceUrl,
             @Value("${store.product-service.url}") String productServiceUrl
     ) {
-        this.storeGatewayHost = storeGatewayHost;
         this.categoryServiceUrl = categoryServiceUrl;
         this.productServiceUrl = productServiceUrl;
     }
@@ -31,8 +28,6 @@ public class StoreGatewayApplication {
     public RouteLocator storeRouteLocator(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
                 .route("categories", route -> route
-                        .host(storeGatewayHost)
-                        .and()
                         .path(
                                 "/api/categories",
                                 "/api/categories/{uuid}"
@@ -40,8 +35,6 @@ public class StoreGatewayApplication {
                         .uri(categoryServiceUrl)
                 )
                 .route("products", route -> route
-                        .host(storeGatewayHost)
-                        .and()
                         .path(
                                 "/api/products",
                                 "/api/products/{uuid}",
