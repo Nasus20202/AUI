@@ -44,7 +44,7 @@ public class ProductControllerImpl implements ProductController {
 
     @Override
     public ProductsResponse getProductsByCategory(UUID uuid) {
-        log.info("Get products by category with UUID: " + uuid);
+        log.info("Get products in category with UUID: " + uuid);
 
         var category = categoryService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
