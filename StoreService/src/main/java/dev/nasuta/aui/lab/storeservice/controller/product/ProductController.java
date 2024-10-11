@@ -12,27 +12,22 @@ import java.util.UUID;
 public interface ProductController {
     @GetMapping("/products")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     ProductsResponse getProducts();
 
     @GetMapping("/products/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     ProductResponse getProduct(@PathVariable UUID uuid);
 
     @GetMapping("/categories/{uuid}/products")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     ProductsResponse getProductsByCategory(@PathVariable UUID uuid);
 
-    @PostMapping("/products")
+    @PostMapping("/categories/{uuid}/products")
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    ProductResponse createProduct(@RequestBody CreateProductRequest request);
+    ProductResponse createProduct(@PathVariable UUID uuid, @RequestBody CreateProductRequest request);
 
-    @PutMapping("/products/{uuid}")
+    @PatchMapping("/products/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     ProductResponse updateProduct(@PathVariable UUID uuid, @RequestBody UpdateProductRequest request);
 
     @DeleteMapping("/products/{uuid}")

@@ -6,7 +6,9 @@ import dev.nasuta.aui.lab.storeservice.controller.category.dto.CreateCategoryReq
 import dev.nasuta.aui.lab.storeservice.controller.category.dto.UpdateCategoryRequest;
 import dev.nasuta.aui.lab.storeservice.service.category.CategoryService;
 import lombok.extern.java.Log;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -21,29 +23,54 @@ public class CategoryControllerImpl implements CategoryController {
 
     @Override
     public CategoriesResponse getCategories() {
-        log.info("Getting all categories");
+        log.info("Get all categories");
 
-        var categories = categoryService.getAll();
-        return CategoriesResponse.from(categories);
+        return CategoriesResponse.from(categoryService.getAll());
     }
 
     @Override
     public CategoryResponse getCategory(UUID uuid) {
-        return null;
+        log.info("Get category with UUID: " + uuid);
+
+        return categoryService.getById(uuid)
+                .map(CategoryResponse::from)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
     }
 
     @Override
     public CategoryResponse createCategory(CreateCategoryRequest request) {
-        return null;
+        log.info("Create category with name: " + request.getName());
+
+        if (request.getName() == null || request.getName().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name is required");
+        }
+
+        var category = request.toEntity();
+        categoryService.create(category);
+
+        return CategoryResponse.from(category);
     }
 
     @Override
     public CategoryResponse updateCategory(UUID uuid, UpdateCategoryRequest request) {
-        return null;
+        log.info("Update category with UUID: " + uuid);
+
+        var category = categoryService.getById(uuid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+
+        category = request.updateCategory(category);
+        categoryService.update(category);
+
+        return CategoryResponse.from(category);
     }
 
     @Override
     public void deleteCategory(UUID uuid) {
+        log.info("Delete category with UUID: " + uuid);
 
+        if (categoryService.getById(uuid).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+        }
+        categoryService.delete(uuid);
     }
 }

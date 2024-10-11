@@ -10,11 +10,11 @@ import java.util.UUID;
 @Value
 @Builder
 public class CategoriesResponse {
-    List<CategoryDto> products;
+    List<CategoryDto> categories;
 
     public static CategoriesResponse from(List<Category> categories) {
         return builder()
-                .products(categories.stream()
+                .categories(categories.stream()
                         .map(CategoryDto::from)
                         .toList())
                 .build();

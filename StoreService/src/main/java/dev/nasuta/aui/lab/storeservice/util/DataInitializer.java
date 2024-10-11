@@ -4,6 +4,7 @@ import dev.nasuta.aui.lab.storeservice.entity.Category;
 import dev.nasuta.aui.lab.storeservice.entity.Product;
 import dev.nasuta.aui.lab.storeservice.repository.category.CategoryRepository;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
+@Log
 public class DataInitializer {
     private final CategoryRepository categoryRepository;
 
@@ -24,6 +26,8 @@ public class DataInitializer {
         if (categoryRepository.count() > 0) {
             return;
         }
+
+        log.info("Inserting example data");
 
         var categories = List.of(
                 Category.builder()

@@ -12,22 +12,18 @@ import java.util.UUID;
 public interface CategoryController {
     @GetMapping("/categories")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     CategoriesResponse getCategories();
 
     @GetMapping("/categories/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     CategoryResponse getCategory(@PathVariable UUID uuid);
 
-    @PostMapping("/categories")
+    @PutMapping("/categories")
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     CategoryResponse createCategory(@RequestBody CreateCategoryRequest request);
 
-    @PutMapping("/categories/{uuid}")
+    @PatchMapping("/categories/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
     CategoryResponse updateCategory(@PathVariable UUID uuid, @RequestBody UpdateCategoryRequest request);
 
     @DeleteMapping("/categories/{uuid}")
