@@ -9,11 +9,13 @@ import lombok.Value;
 public class CreateCategoryRequest {
     String name;
     String description;
+    int popularity;
 
     public Category toEntity() {
         return Category.builder()
                 .name(name)
                 .description(description)
+                .popularity(popularity)
                 .build();
     }
 }

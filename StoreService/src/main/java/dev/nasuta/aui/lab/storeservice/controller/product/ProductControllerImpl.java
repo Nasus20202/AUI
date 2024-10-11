@@ -59,6 +59,12 @@ public class ProductControllerImpl implements ProductController {
         if (request.getName() == null || request.getName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name is required");
         }
+        if (request.getPrice() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than or equal to 0");
+        }
+        if (request.getStock() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Stock must be greater than or equal to 0");
+        }
 
         var category = categoryService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
@@ -76,6 +82,12 @@ public class ProductControllerImpl implements ProductController {
 
         var product = productService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        if (request.getPrice() != null && request.getPrice() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than or equal to 0");
+        }
+        if (request.getStock() != null && request.getStock() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Stock must be greater than or equal to 0");
+        }
 
         product = request.updateProduct(product);
         productService.update(product);

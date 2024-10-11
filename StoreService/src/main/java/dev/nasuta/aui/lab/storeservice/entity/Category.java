@@ -29,6 +29,9 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "popularity")
+    private int popularity;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Builder.Default

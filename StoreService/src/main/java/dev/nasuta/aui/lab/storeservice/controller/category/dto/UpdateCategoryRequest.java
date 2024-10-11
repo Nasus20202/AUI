@@ -9,6 +9,7 @@ import lombok.Value;
 public class UpdateCategoryRequest {
     String name;
     String description;
+    Integer popularity;
 
     public Category updateCategory(Category category) {
         if (name != null) {
@@ -16,6 +17,9 @@ public class UpdateCategoryRequest {
         }
         if (description != null) {
             category.setDescription(description);
+        }
+        if (popularity != null) {
+            category.setPopularity(popularity);
         }
         return category;
     }

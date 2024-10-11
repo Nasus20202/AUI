@@ -44,6 +44,9 @@ public class CategoryControllerImpl implements CategoryController {
         if (request.getName() == null || request.getName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name is required");
         }
+        if (request.getPopularity() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Popularity must be greater than or equal to 0");
+        }
 
         var category = request.toEntity();
         categoryService.create(category);
@@ -57,6 +60,10 @@ public class CategoryControllerImpl implements CategoryController {
 
         var category = categoryService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+
+        if (request.getPopularity() != null && request.getPopularity() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Popularity must be greater than or equal to 0");
+        }
 
         category = request.updateCategory(category);
         categoryService.update(category);
