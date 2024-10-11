@@ -21,17 +21,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> findAll() {
+    public List<Category> getAll() {
         return categoryRepository.findAll();
     }
 
     @Override
-    public Optional<Category> findById(UUID id) {
+    public Optional<Category> getById(UUID id) {
         return categoryRepository.findById(id);
     }
 
     @Override
-    public List<Category> findByName(String name) {
+    public List<Category> getByName(String name) {
         return categoryRepository.findByNameIgnoreCase(name);
     }
 

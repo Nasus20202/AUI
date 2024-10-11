@@ -8,15 +8,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ProductService {
-    List<Product> findAll();
+    List<Product> getAll();
 
-    Optional<Product> findById(UUID id);
+    Optional<Product> getById(UUID id);
 
-    List<Product> findByCategory(Category category);
+    List<Product> getByCategory(Category category);
 
-    List<Product> findByName(String name);
+    List<Product> getByName(String name);
 
-    List<Product> findByNameAndCategory(String name, Category category);
+    List<Product> getByNameAndCategory(String name, Category category);
 
     void create(Product product);
 

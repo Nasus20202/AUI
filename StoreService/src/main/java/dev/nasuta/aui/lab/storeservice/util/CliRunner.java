@@ -31,17 +31,17 @@ public class CliRunner implements CommandLineRunner {
             var command = scanner.nextLine();
             switch (command) {
                 case "get_categories" -> {
-                    categoryService.findAll().forEach(System.out::println);
+                    categoryService.getAll().forEach(System.out::println);
                 }
                 case "get_products" -> {
-                    productService.findAll().forEach(System.out::println);
+                    productService.getAll().forEach(System.out::println);
                 }
                 case "get_category_products" -> {
                     System.out.print("Enter category name: ");
                     var categoryName = scanner.nextLine();
-                    var category = categoryService.findByName(categoryName).stream().findFirst();
+                    var category = categoryService.getByName(categoryName).stream().findFirst();
                     if (category.isPresent()) {
-                        productService.findByCategory(category.get()).forEach(System.out::println);
+                        productService.getByCategory(category.get()).forEach(System.out::println);
                     } else {
                         System.out.println("Category not found");
                     }
@@ -60,7 +60,7 @@ public class CliRunner implements CommandLineRunner {
                 case "delete_category" -> {
                     System.out.print("Enter category name: ");
                     var categoryName = scanner.nextLine();
-                    categoryService.findByName(categoryName).forEach(category -> {
+                    categoryService.getByName(categoryName).forEach(category -> {
                         System.out.println("Deleted category " + category.getName());
                         categoryService.delete(category.getId());
                     });
@@ -88,7 +88,7 @@ public class CliRunner implements CommandLineRunner {
                         break;
                     }
 
-                    var category = categoryService.findByName(categoryName).stream().findFirst();
+                    var category = categoryService.getByName(categoryName).stream().findFirst();
                     if (category.isPresent()) {
                         productService.create(Product.builder()
                                 .name(name)
@@ -107,12 +107,12 @@ public class CliRunner implements CommandLineRunner {
                     System.out.print("Enter product name: ");
                     var productName = scanner.nextLine();
 
-                    var category = categoryService.findByName(categoryName).stream().findFirst();
+                    var category = categoryService.getByName(categoryName).stream().findFirst();
                     if (category.isEmpty()) {
                         System.out.println("Category not found");
                         break;
                     }
-                    productService.findByNameAndCategory(productName, category.get()).forEach(product -> {
+                    productService.getByNameAndCategory(productName, category.get()).forEach(product -> {
                         System.out.println("Deleted product " + product.getName() + " from category " + category.get().getName());
                         productService.delete(product.getId());
                     });

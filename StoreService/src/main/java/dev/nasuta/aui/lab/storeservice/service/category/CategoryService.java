@@ -7,11 +7,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CategoryService {
-    List<Category> findAll();
+    List<Category> getAll();
 
-    Optional<Category> findById(UUID id);
+    Optional<Category> getById(UUID id);
 
-    List<Category> findByName(String name);
+    List<Category> getByName(String name);
 
     void create(Category category);
 
