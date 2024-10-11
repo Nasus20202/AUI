@@ -1,0 +1,31 @@
+### Get all categories
+GET http://localhost:8081/api/categories
+
+### Create a new category
+PUT http://localhost:8081/api/categories
+Content-Type: application/json
+
+{
+  "name": "Meat",
+  "description": "Tasty pork, beef, and chicken",
+  "popularity": 4
+}
+
+### Get a category
+GET http://localhost:8081/api/categories/3fab9887-b93e-44ef-b0fb-815898584723
+
+### Get a not existing category
+GET http://localhost:8081/api/categories/8554295e-22c0-4d94-9358-177ccc857b10
+
+### Update a category
+PATCH http://localhost:8081/api/categories/3fab9887-b93e-44ef-b0fb-815898584723
+Content-Type: application/json
+
+{
+  "name": "Fruits",
+  "description": "Even more fruits",
+  "popularity": 5
+}
+
+### Delete a category
+DELETE http://localhost:8081/api/categories/3fab9887-b93e-44ef-b0fb-815898584723

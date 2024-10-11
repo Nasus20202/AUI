@@ -4,7 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fea82a5f-11ce-405f-9494-3d68c498f708" name="Changes" comment="" />
+    <list default="true" id="fea82a5f-11ce-405f-9494-3d68c498f708" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/StoreService/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/requests.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/StoreServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/CategoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/CategoryControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/dto/CategoriesResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/dto/CategoryResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/dto/CreateCategoryRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/dto/UpdateCategoryRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/mapper/CategoriesToResponseMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/mapper/CategoryToResponseMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/category/mapper/CreateRequestToCategoryMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/ProductController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/ProductControllerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/dto/CreateProductRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/dto/ProductResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/dto/ProductsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/dto/UpdateProductRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/mapper/CreateRequestToProductMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/mapper/ProductToResponseMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/controller/product/mapper/ProductsToResponseMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/entity/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/repository/category/CategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/repository/product/ProductRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/service/category/CategoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/service/category/CategoryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/service/product/ProductService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/service/product/ProductServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/java/dev/nasuta/aui/lab/storeservice/util/DataInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StoreService/src/test/java/dev/nasuta/aui/lab/storeservice/StoreServiceApplicationTests.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +72,7 @@
   "keyToString": {
     "Maven.Run.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "lab-2",
+    "git-widget-placeholder": "lab-4",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/nasus/Studia/AUI",
     "node.js.detected.package.eslint": "true",
@@ -103,6 +140,7 @@
       <workItem from="1728417006102" duration="3301000" />
       <workItem from="1728484014233" duration="12000" />
       <workItem from="1728484285375" duration="149000" />
+      <workItem from="1728667499252" duration="7000" />
     </task>
     <servers />
   </component>
