@@ -4,6 +4,9 @@ import dev.nasuta.aui.lab.storeservice.controller.product.dto.CreateProductReque
 import dev.nasuta.aui.lab.storeservice.controller.product.dto.ProductResponse;
 import dev.nasuta.aui.lab.storeservice.controller.product.dto.ProductsResponse;
 import dev.nasuta.aui.lab.storeservice.controller.product.dto.UpdateProductRequest;
+import dev.nasuta.aui.lab.storeservice.controller.product.mapper.CreateRequestToProductMapper;
+import dev.nasuta.aui.lab.storeservice.controller.product.mapper.ProductToResponseMapper;
+import dev.nasuta.aui.lab.storeservice.controller.product.mapper.ProductsToResponseMapper;
 import dev.nasuta.aui.lab.storeservice.service.category.CategoryService;
 import dev.nasuta.aui.lab.storeservice.service.product.ProductService;
 import lombok.extern.java.Log;
@@ -20,17 +23,28 @@ public class ProductControllerImpl implements ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
 
+    private final ProductToResponseMapper productToResponseMapper;
+    private final ProductsToResponseMapper productsToResponseMapper;
+    private final CreateRequestToProductMapper createRequestToProductMapper;
+
     @Autowired
-    public ProductControllerImpl(ProductService productService, CategoryService categoryService) {
+    public ProductControllerImpl(ProductService productService,
+                                 CategoryService categoryService,
+                                 ProductToResponseMapper productToResponseMapper,
+                                 ProductsToResponseMapper productsToResponseMapper,
+                                 CreateRequestToProductMapper createRequestToProductMapper) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.productToResponseMapper = productToResponseMapper;
+        this.productsToResponseMapper = productsToResponseMapper;
+        this.createRequestToProductMapper = createRequestToProductMapper;
     }
 
     @Override
     public ProductsResponse getProducts() {
         log.info("Get all products");
 
-        return ProductsResponse.from(productService.getAll());
+        return productsToResponseMapper.apply(productService.getAll());
     }
 
     @Override
@@ -38,7 +52,7 @@ public class ProductControllerImpl implements ProductController {
         log.info("Get product with UUID: " + uuid);
 
         return productService.getById(uuid)
-                .map(ProductResponse::from)
+                .map(productToResponseMapper)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
     }
 
@@ -49,7 +63,8 @@ public class ProductControllerImpl implements ProductController {
         var category = categoryService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
 
-        return ProductsResponse.from(productService.getByCategory(category));
+        return productsToResponseMapper.apply(productService.getByCategory(category));
+
     }
 
     @Override
@@ -69,11 +84,11 @@ public class ProductControllerImpl implements ProductController {
         var category = categoryService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
 
-        var product = request.toEntity();
+        var product = createRequestToProductMapper.apply(request);
         product.setCategory(category);
         productService.create(product);
 
-        return ProductResponse.from(product);
+        return productToResponseMapper.apply(product);
     }
 
     @Override
@@ -82,17 +97,26 @@ public class ProductControllerImpl implements ProductController {
 
         var product = productService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
-        if (request.getPrice() != null && request.getPrice() < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than or equal to 0");
+
+        if (request.getName() != null) {
+            product.setName(request.getName());
         }
-        if (request.getStock() != null && request.getStock() < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Stock must be greater than or equal to 0");
+        if (request.getPrice() != null) {
+            if (request.getPrice() < 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price must be greater than or equal to 0");
+            }
+            product.setPrice(request.getPrice());
+        }
+        if (request.getStock() != null) {
+            if (request.getStock() < 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Stock must be greater than or equal to 0");
+            }
+            product.setStock(request.getStock());
         }
 
-        product = request.updateProduct(product);
         productService.update(product);
 
-        return ProductResponse.from(product);
+        return productToResponseMapper.apply(product);
     }
 
     @Override

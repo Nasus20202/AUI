@@ -4,6 +4,9 @@ import dev.nasuta.aui.lab.storeservice.controller.category.dto.CategoriesRespons
 import dev.nasuta.aui.lab.storeservice.controller.category.dto.CategoryResponse;
 import dev.nasuta.aui.lab.storeservice.controller.category.dto.CreateCategoryRequest;
 import dev.nasuta.aui.lab.storeservice.controller.category.dto.UpdateCategoryRequest;
+import dev.nasuta.aui.lab.storeservice.controller.category.mapper.CategoriesToResponseMapper;
+import dev.nasuta.aui.lab.storeservice.controller.category.mapper.CategoryToResponseMapper;
+import dev.nasuta.aui.lab.storeservice.controller.category.mapper.CreateRequestToCategoryMapper;
 import dev.nasuta.aui.lab.storeservice.service.category.CategoryService;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
@@ -17,15 +20,26 @@ import java.util.UUID;
 public class CategoryControllerImpl implements CategoryController {
     private final CategoryService categoryService;
 
-    public CategoryControllerImpl(CategoryService categoryService) {
+    private final CategoryToResponseMapper categoryToResponseMapper;
+    private final CategoriesToResponseMapper categoriesToResponseMapper;
+    private final CreateRequestToCategoryMapper createRequestToCategoryMapper;
+
+
+    public CategoryControllerImpl(CategoryService categoryService,
+                                  CategoryToResponseMapper categoryToResponseMapper,
+                                  CategoriesToResponseMapper categoriesToResponseMapper,
+                                  CreateRequestToCategoryMapper createRequestToCategoryMapper) {
         this.categoryService = categoryService;
+        this.categoryToResponseMapper = categoryToResponseMapper;
+        this.categoriesToResponseMapper = categoriesToResponseMapper;
+        this.createRequestToCategoryMapper = createRequestToCategoryMapper;
     }
 
     @Override
     public CategoriesResponse getCategories() {
         log.info("Get all categories");
 
-        return CategoriesResponse.from(categoryService.getAll());
+        return categoriesToResponseMapper.apply(categoryService.getAll());
     }
 
     @Override
@@ -33,7 +47,7 @@ public class CategoryControllerImpl implements CategoryController {
         log.info("Get category with UUID: " + uuid);
 
         return categoryService.getById(uuid)
-                .map(CategoryResponse::from)
+                .map(categoryToResponseMapper)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
     }
 
@@ -48,10 +62,10 @@ public class CategoryControllerImpl implements CategoryController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Popularity must be greater than or equal to 0");
         }
 
-        var category = request.toEntity();
+        var category = createRequestToCategoryMapper.apply(request);
         categoryService.create(category);
 
-        return CategoryResponse.from(category);
+        return categoryToResponseMapper.apply(category);
     }
 
     @Override
@@ -61,14 +75,22 @@ public class CategoryControllerImpl implements CategoryController {
         var category = categoryService.getById(uuid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
 
-        if (request.getPopularity() != null && request.getPopularity() < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Popularity must be greater than or equal to 0");
+        if (request.getName() != null) {
+            if (request.getName().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name cannot be empty");
+            }
+            category.setName(request.getName());
+        }
+        if (request.getPopularity() != null) {
+            if (request.getPopularity() < 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Popularity must be greater than or equal to 0");
+            }
+            category.setPopularity(request.getPopularity());
         }
 
-        category = request.updateCategory(category);
         categoryService.update(category);
 
-        return CategoryResponse.from(category);
+        return categoryToResponseMapper.apply(category);
     }
 
     @Override

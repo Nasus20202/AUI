@@ -1,6 +1,5 @@
 package dev.nasuta.aui.lab.storeservice.controller.category.dto;
 
-import dev.nasuta.aui.lab.storeservice.entity.Category;
 import lombok.Builder;
 import lombok.Value;
 
@@ -10,27 +9,12 @@ import java.util.UUID;
 @Value
 @Builder
 public class CategoriesResponse {
-    List<CategoryDto> categories;
-
-    public static CategoriesResponse from(List<Category> categories) {
-        return builder()
-                .categories(categories.stream()
-                        .map(CategoryDto::from)
-                        .toList())
-                .build();
-    }
+    List<Category> categories;
 
     @Value
     @Builder
-    public static class CategoryDto {
+    public static class Category {
         UUID id;
         String name;
-
-        public static CategoryDto from(Category category) {
-            return builder()
-                    .id(category.getId())
-                    .name(category.getName())
-                    .build();
-        }
     }
 }

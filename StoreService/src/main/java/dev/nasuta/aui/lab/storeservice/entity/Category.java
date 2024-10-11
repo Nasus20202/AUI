@@ -7,13 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Entity
 @Table(name = "categories")
 public class Category {

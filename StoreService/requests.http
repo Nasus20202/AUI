@@ -7,7 +7,8 @@ Content-Type: application/json
 
 {
   "name": "Meat",
-  "description": "Tasty pork, beef, and chicken"
+  "description": "Tasty pork, beef, and chicken",
+  "popularity": 4
 }
 
 ### Get a category
@@ -22,7 +23,8 @@ Content-Type: application/json
 
 {
   "name": "Fruits",
-  "description": "Even more fruits"
+  "description": "Even more fruits",
+  "popularity": 5
 }
 
 ### Delete a category

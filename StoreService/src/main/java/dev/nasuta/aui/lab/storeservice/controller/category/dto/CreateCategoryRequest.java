@@ -1,6 +1,5 @@
 package dev.nasuta.aui.lab.storeservice.controller.category.dto;
 
-import dev.nasuta.aui.lab.storeservice.entity.Category;
 import lombok.Builder;
 import lombok.Value;
 
@@ -10,12 +9,4 @@ public class CreateCategoryRequest {
     String name;
     String description;
     int popularity;
-
-    public Category toEntity() {
-        return Category.builder()
-                .name(name)
-                .description(description)
-                .popularity(popularity)
-                .build();
-    }
 }
