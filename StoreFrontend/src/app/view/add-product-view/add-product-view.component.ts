@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 import { Product } from '../../api/product/model/product';
 import { Category } from '../../api/category/model/category';
 
@@ -19,6 +20,7 @@ import { Category } from '../../api/category/model/category';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ErrorMessageComponent,
   ],
   templateUrl: './add-product-view.component.html',
   styleUrl: './add-product-view.component.css',
@@ -28,7 +30,7 @@ export class AddProductViewComponent implements OnInit {
     private categoryService: CategoryService,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   message: string = '';

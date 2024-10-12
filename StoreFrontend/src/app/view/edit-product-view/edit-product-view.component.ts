@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ViewTitleComponent } from '../../component/view-title/view-title.component';
+import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 
 @Component({
   selector: 'app-edit-product-view',
@@ -19,6 +20,7 @@ import { ViewTitleComponent } from '../../component/view-title/view-title.compon
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ErrorMessageComponent,
   ],
   templateUrl: './edit-product-view.component.html',
   styleUrl: './edit-product-view.component.css',
@@ -28,7 +30,7 @@ export class EditProductViewComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   product: Product | undefined;

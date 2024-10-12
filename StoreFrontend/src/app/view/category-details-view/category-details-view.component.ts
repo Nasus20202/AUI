@@ -10,6 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Products } from '../../api/product/model/products';
 import { ProductService } from '../../api/product/service/product.service';
+import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 
 @Component({
   selector: 'app-category-details-view',
@@ -21,6 +22,7 @@ import { ProductService } from '../../api/product/service/product.service';
     RouterLink,
     MatListModule,
     MatIconModule,
+    ErrorMessageComponent,
   ],
   templateUrl: './category-details-view.component.html',
   styleUrl: './category-details-view.component.css',
@@ -29,7 +31,7 @@ export class CategoryDetailsViewComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   message: string = '';

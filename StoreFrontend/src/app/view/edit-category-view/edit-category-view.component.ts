@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 
 @Component({
   selector: 'app-add-category-view',
@@ -19,6 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ErrorMessageComponent,
   ],
   templateUrl: './edit-category-view.component.html',
   styleUrl: './edit-category-view.component.css',
@@ -27,7 +29,7 @@ export class EditCategoryViewComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   category: Category | undefined;
