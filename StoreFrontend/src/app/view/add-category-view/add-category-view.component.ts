@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ErrorMessageComponent,
   ],
   templateUrl: './add-category-view.component.html',
   styleUrl: './add-category-view.component.css',
@@ -26,7 +28,7 @@ import { Router } from '@angular/router';
 export class AddCategoryViewComponent {
   constructor(
     private categoryService: CategoryService,
-    private router: Router,
+    private router: Router
   ) {}
 
   category: Category = {

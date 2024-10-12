@@ -8,11 +8,18 @@ import { ViewTitleComponent } from '../../component/view-title/view-title.compon
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 
 @Component({
   selector: 'app-product-details-view',
   standalone: true,
-  imports: [ViewTitleComponent, MatCardModule, RouterLink, MatButtonModule],
+  imports: [
+    ViewTitleComponent,
+    MatCardModule,
+    RouterLink,
+    MatButtonModule,
+    ErrorMessageComponent,
+  ],
   templateUrl: './product-details-view.component.html',
   styleUrl: './product-details-view.component.css',
 })
@@ -20,7 +27,7 @@ export class ProductDetailsViewComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   message: string = '';
