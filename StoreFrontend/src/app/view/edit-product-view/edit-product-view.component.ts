@@ -4,24 +4,14 @@ import { Category } from '../../api/category/model/category';
 import { Product } from '../../api/product/model/product';
 import { CategoryService } from '../../api/category/service/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { ViewTitleComponent } from '../../component/view-title/view-title.component';
 import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
+import { ProductFormComponent } from '../../component/product-form/product-form.component';
 
 @Component({
   selector: 'app-edit-product-view',
   standalone: true,
-  imports: [
-    ViewTitleComponent,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    ErrorMessageComponent,
-  ],
+  imports: [ViewTitleComponent, ErrorMessageComponent, ProductFormComponent],
   templateUrl: './edit-product-view.component.html',
   styleUrl: './edit-product-view.component.css',
 })
@@ -63,7 +53,12 @@ export class EditProductViewComponent implements OnInit {
     if (this.product) {
       this.productService.updateProduct(this.product).subscribe({
         next: (product) => {
-          this.router.navigate(['/categories', this.category?.id]);
+          this.router.navigate([
+            '/categories',
+            this.category?.id,
+            'products',
+            product.id,
+          ]);
         },
         error: (error) => {
           this.message = error.error.message;
