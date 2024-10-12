@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build: ./StoreFrontend
+    ports:
+      - "8080:80"
+    environment:
+      - API_URL=http://api-gateway:8080
+  api-gateway:
+    build: ./StoreGateway
+    environment:
+      - STORE_CATEGORY-SERVICE_URL=http://category-service:8081
+      - STORE_PRODUCT-SERVICE_URL=http://product-service:8082
+  category-service:
+    build: ./CategoryService
+    environment:
+      - STORE_PRODUCT-SERVICE_URL=http://product-service:8082/api
+  product-service:
+    build: ./ProductService
