@@ -81,6 +81,9 @@ public class CategoryControllerImpl implements CategoryController {
             }
             category.setName(request.getName());
         }
+        if (request.getDescription() != null) {
+            category.setDescription(request.getDescription());
+        }
         if (request.getPopularity() != null) {
             if (request.getPopularity() < 0) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Popularity must be greater than or equal to 0");
