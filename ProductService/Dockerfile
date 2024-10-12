@@ -4,14 +4,14 @@ WORKDIR /build
 
 COPY . .
 
-RUN ./mvnw compile
+RUN ./mvnw package
 
 FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /build/target/*.jar /app/product-service.jar
+COPY --from=build /build/target/*.jar product-service.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "product-service.jar"]
+CMD ["java", "-jar", "product-service.jar"]\

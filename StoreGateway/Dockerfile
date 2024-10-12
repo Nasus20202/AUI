@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY . .
 
-RUN ./mvnw compile
+RUN ./mvnw package
 
 FROM eclipse-temurin:21-jre-alpine
 
