@@ -1,5 +1,5 @@
 export interface Category {
-  id: string | undefined;
+  id: string;
   name: string;
   description: string;
   popularity: number;

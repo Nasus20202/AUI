@@ -8,10 +8,9 @@ describe('AddCategoryViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddCategoryViewComponent]
-    })
-    .compileComponents();
-    
+      imports: [AddCategoryViewComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AddCategoryViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

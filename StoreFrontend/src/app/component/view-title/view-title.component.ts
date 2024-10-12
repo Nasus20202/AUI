@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './view-title.component.html',
-  styleUrl: './view-title.component.css'
+  styleUrl: './view-title.component.css',
 })
 export class ViewTitleComponent {
   @Input() title = '';
