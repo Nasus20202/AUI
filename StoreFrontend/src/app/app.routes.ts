@@ -10,10 +10,6 @@ import { EditProductViewComponent } from './view/edit-product-view/edit-product-
 export const routes: Routes = [
   {
     component: CategoryListViewComponent,
-    path: '',
-  },
-  {
-    component: CategoryListViewComponent,
     path: 'categories',
   },
   {
@@ -39,5 +35,9 @@ export const routes: Routes = [
   {
     component: EditProductViewComponent,
     path: 'categories/:categoryId/products/:productId/edit',
+  },
+  {
+    component: CategoryListViewComponent,
+    path: '**',
   },
 ];
