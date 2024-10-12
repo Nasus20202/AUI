@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 import { Product } from '../../api/product/model/product';
 import { Category } from '../../api/category/model/category';
+import { ProductFormComponent } from '../../component/product-form/product-form.component';
 
 @Component({
   selector: 'app-add-product-view',
@@ -21,6 +22,7 @@ import { Category } from '../../api/category/model/category';
     MatFormFieldModule,
     FormsModule,
     ErrorMessageComponent,
+    ProductFormComponent,
   ],
   templateUrl: './add-product-view.component.html',
   styleUrl: './add-product-view.component.css',
@@ -35,12 +37,6 @@ export class AddProductViewComponent implements OnInit {
 
   message: string = '';
   category: Category | undefined;
-  product: Product = {
-    id: '',
-    name: '',
-    price: 0,
-    stock: 0,
-  };
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -55,25 +51,23 @@ export class AddProductViewComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit(product: Product): void {
     this.message = '';
     if (!this.category) {
       return;
     }
-    this.productService
-      .createProduct(this.product, this.category.id)
-      .subscribe({
-        next: (product) => {
-          this.router.navigate([
-            '/categories',
-            this.category?.id,
-            'products',
-            product.id,
-          ]);
-        },
-        error: (error) => {
-          this.message = error.error.message;
-        },
-      });
+    this.productService.createProduct(product, this.category.id).subscribe({
+      next: (product) => {
+        this.router.navigate([
+          '/categories',
+          this.category?.id,
+          'products',
+          product.id,
+        ]);
+      },
+      error: (error) => {
+        this.message = error.error.message;
+      },
+    });
   }
 }

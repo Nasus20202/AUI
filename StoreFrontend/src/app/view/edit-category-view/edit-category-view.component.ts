@@ -8,20 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoryFormComponent } from '../../component/category-form/category-form.component';
 import { ErrorMessageComponent } from '../../component/error-message/error-message.component';
 
 @Component({
   selector: 'app-add-category-view',
   standalone: true,
-  imports: [
-    ViewTitleComponent,
-    MatCardModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    ErrorMessageComponent,
-  ],
+  imports: [ViewTitleComponent, CategoryFormComponent, ErrorMessageComponent],
   templateUrl: './edit-category-view.component.html',
   styleUrl: './edit-category-view.component.css',
 })
