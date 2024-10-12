@@ -5,6 +5,7 @@ import { EditCategoryViewComponent } from './view/edit-category-view/edit-catego
 import { CategoryDetailsViewComponent } from './view/category-details-view/category-details-view.component';
 import { ProductDetailsViewComponent } from './view/product-details-view/product-details-view.component';
 import { AddProductViewComponent } from './view/add-product-view/add-product-view.component';
+import { EditProductViewComponent } from './view/edit-product-view/edit-product-view.component';
 
 export const routes: Routes = [
   {
@@ -36,7 +37,7 @@ export const routes: Routes = [
     path: 'categories/:categoryId/products/:productId',
   },
   {
-    component: EditCategoryViewComponent,
+    component: EditProductViewComponent,
     path: 'categories/:categoryId/products/:productId/edit',
   },
 ];

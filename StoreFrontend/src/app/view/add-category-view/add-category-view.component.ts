@@ -42,7 +42,7 @@ export class AddCategoryViewComponent {
     this.message = '';
     this.categoryService.createCategory(this.category).subscribe({
       next: (category: Category) => {
-        this.router.navigate(['/categories']);
+        this.router.navigate(['/categories', category.id]);
       },
       error: (error) => {
         this.message = error.error.message;

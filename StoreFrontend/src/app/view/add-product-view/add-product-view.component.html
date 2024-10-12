@@ -1,3 +1,8 @@
+@if (message) {
+  <button mat-flat-button (click)="message = ''" color="warn">
+    {{ message }}
+  </button>
+}
 @if (category) {
   <app-view-title title="New product for category {{ category.name }}" />
 
@@ -39,10 +44,5 @@
       </mat-form-field>
     </p>
     <button mat-raised-button type="submit">Save</button>
-    @if (message) {
-      <button mat-flat-button (click)="message = ''" color="warn">
-        {{ message }}
-      </button>
-    }
   </form>
 }

@@ -1,1 +1,50 @@
-<p>edit-product-view works!</p>
+@if (message) {
+  <button mat-flat-button (click)="message = ''" color="warn">
+    {{ message }}
+  </button>
+}
+@if (product && category) {
+  <app-view-title
+    title="Edit product {{ product.name }} in category {{ category.name }}"
+  />
+
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+      <mat-form-field>
+        <label for="name">Name</label>
+        <input
+          matInput
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="product.name"
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <label for="price">Price</label>
+        <input
+          matInput
+          type="number"
+          id="price"
+          name="price"
+          [(ngModel)]="product.price"
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <label for="stock">Stock</label>
+        <input
+          matInput
+          type="number"
+          id="stock"
+          name="stock"
+          [(ngModel)]="product.stock"
+        />
+      </mat-form-field>
+    </p>
+    <button mat-raised-button type="submit">Save</button>
+  </form>
+}

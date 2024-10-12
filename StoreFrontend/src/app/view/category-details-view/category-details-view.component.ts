@@ -52,7 +52,7 @@ export class CategoryDetailsViewComponent implements OnInit {
 
   fetchProducts(): void {
     if (this.category) {
-      this.productService.getProductByCategoryId(this.category.id).subscribe({
+      this.productService.getProductsByCategoryId(this.category.id).subscribe({
         next: (products: Products) => {
           this.products = products;
         },

@@ -39,10 +39,10 @@
       </mat-form-field>
     </p>
     <button mat-raised-button type="submit">Save</button>
-    @if (message) {
-      <button mat-flat-button (click)="message = ''" color="warn">
-        {{ message }}
-      </button>
-    }
   </form>
+}
+@if (message) {
+  <button mat-flat-button (click)="message = ''" color="warn">
+    {{ message }}
+  </button>
 }
