@@ -1,0 +1,57 @@
+services:
+  frontend:
+    restart: always
+    build: ./StoreFrontend
+    ports:
+      - "8080:80"
+    environment:
+      - API_URL=http://api-gateway:8080
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    restart: always
+    build: ./StoreGateway
+    environment:
+      - STORE_CATEGORY-SERVICE_URL=http://category-service:8080
+      - STORE_PRODUCT-SERVICE_URL=http://product-service:8080
+    depends_on:
+      - category-service
+      - product-service
+
+  category-service:
+    restart: always
+    build: ./CategoryService
+    environment:
+      - STORE_PRODUCT-SERVICE_URL=http://product-service:8080/api
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://category-service-db:5432/${CATEGORY_POSTGRES_DB}
+      - SPRING_DATASOURCE_USERNAME=${CATEGORY_POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${CATEGORY_POSTGRES_USER}
+    depends_on:
+      - category-service-db
+
+  category-service-db:
+    restart: always
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=${CATEGORY_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${CATEGORY_POSTGRES_USER}
+      - POSTGRES_DB=${CATEGORY_POSTGRES_DB}
+
+  product-service:
+    restart: always
+    build: ./ProductService
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://product-service-db:5432/${PRODUCT_POSTGRES_DB}
+      - SPRING_DATASOURCE_USERNAME=${PRODUCT_POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${PRODUCT_POSTGRES_USER}
+    depends_on:
+      - product-service-db
+
+  product-service-db:
+    restart: always
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=${PRODUCT_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${PRODUCT_POSTGRES_USER}
+      - POSTGRES_DB=${PRODUCT_POSTGRES_DB}

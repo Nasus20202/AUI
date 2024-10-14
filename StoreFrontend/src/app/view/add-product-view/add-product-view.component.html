@@ -1,0 +1,5 @@
+@if (category) {
+<app-view-title title="New product for category {{ category.name }}" />
+
+<app-product-form [message]="message" (submit)="onSubmit($event)" />
+} @else {<app-error-message [message]="message" />}

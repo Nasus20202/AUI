@@ -1,0 +1,19 @@
+<app-view-title title="Categories" />
+
+<mat-list>
+  @for (category of categories?.categories; track category.id) {
+    <mat-list-item>
+      <button mat-button [routerLink]="['/categories', category.id]">
+        {{ category.name }}
+      </button>
+      <button mat-icon-button (click)="deleteCategory(category.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider />
+  }
+</mat-list>
+
+<button mat-raised-button [routerLink]="['/categories', 'new']">
+  New Category
+</button>

@@ -1,0 +1,9 @@
+@if (category) {
+<app-view-title title="Edit category {{ category.name }}" />
+
+<app-category-form
+  [category]="category"
+  [message]="message"
+  (submit)="onSubmit()"
+/>
+} @else {<app-error-message [message]="message" /> }

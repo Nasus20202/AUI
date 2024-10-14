@@ -1,0 +1,66 @@
+### Get all categories
+GET http://localhost:8080/api/categories
+
+### Create a new category
+PUT http://localhost:8080/api/categories
+Content-Type: application/json
+
+{
+  "name": "Meat",
+  "description": "Tasty pork, beef, and chicken",
+  "popularity": 4
+}
+
+### Get a category
+GET http://localhost:8080/api/categories/3fab9887-b93e-44ef-b0fb-815898584723
+
+### Get a not existing category
+GET http://localhost:8080/api/categories/8554295e-22c0-4d94-9358-177ccc857b10
+
+### Update a category
+PATCH http://localhost:8080/api/categories/3fab9887-b93e-44ef-b0fb-815898584723
+Content-Type: application/json
+
+{
+  "name": "Fruits",
+  "description": "Even more fruits",
+  "popularity": 5
+}
+
+### Delete a category
+DELETE http://localhost:8080/api/categories/3fab9887-b93e-44ef-b0fb-815898584723
+
+### Get all products of a category
+GET http://localhost:8080/api/categories/3fab9887-b93e-44ef-b0fb-815898584723/products
+
+### Create a new product in a category
+POST http://localhost:8080/api/categories/3fab9887-b93e-44ef-b0fb-815898584723/products
+Content-Type: application/json
+
+{
+  "name": "Banana",
+  "price": 299,
+  "stock": 76
+}
+
+### Get all products
+GET http://localhost:8080/api/products
+
+### Get a product
+GET http://localhost:8080/api/products/a76a11ef-9889-4efb-897e-f1606a9d67b9
+
+### Get a not existing product
+GET http://localhost:8080/api/products/43bb5d03-efeb-4de2-a0ea-d6c0a78c3832
+
+### Update a product
+PATCH http://localhost:8080/api/products/a76a11ef-9889-4efb-897e-f1606a9d67b9
+Content-Type: application/json
+
+{
+  "name": "Red apple",
+  "price": 199,
+  "stock": 67
+}
+
+### Delete a product
+DELETE http://localhost:8080/api/products/a76a11ef-9889-4efb-897e-f1606a9d67b9

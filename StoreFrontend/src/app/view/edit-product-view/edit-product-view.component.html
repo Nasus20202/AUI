@@ -1,0 +1,11 @@
+@if (product && category) {
+<app-view-title
+  title="Edit product {{ product.name }} in category {{ category.name }}"
+/>
+
+<app-product-form
+  [product]="product"
+  [message]="message"
+  (submit)="onSubmit()"
+/>
+} @else {<app-error-message [message]="message" />}

@@ -1,0 +1,46 @@
+@if (category) {
+<app-view-title title="Category {{ category.name }}" />
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ category.name }}</mat-card-title>
+    <mat-card-subtitle>{{ category.description }}</mat-card-subtitle>
+    <mat-card-subtitle>Popularity: {{ category.popularity }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <button mat-button [routerLink]="['/categories', category.id, 'edit']">
+      Edit
+    </button>
+    <button mat-button [routerLink]="['/categories']">
+      Show all categories
+    </button>
+  </mat-card-actions>
+</mat-card>
+<br />
+
+<app-view-title title="{{ products?.products?.length }} products" />
+<mat-list>
+  @for (product of products?.products; track product.id) {
+  <mat-list-item>
+    <button
+      mat-button
+      [routerLink]="['/categories', category.id, 'products', product.id]"
+    >
+      {{ product.name }}
+    </button>
+    <button mat-icon-button (click)="deleteProduct(product.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider />
+  }
+</mat-list>
+
+<button
+  mat-raised-button
+  [routerLink]="['/categories', category.id, 'products', 'new']"
+>
+  New Product
+</button>
+}
+<app-error-message [message]="message" />

@@ -1,0 +1,41 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field>
+      <label for="name">Name</label>
+      <input
+        matInput
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="category.name"
+      />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <label for="description">Description</label>
+      <input
+        matInput
+        type="text"
+        id="description"
+        name="description"
+        [(ngModel)]="category.description"
+      />
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <label for="popularity">Popularity</label>
+      <input
+        matInput
+        type="number"
+        id="popularity"
+        name="popularity"
+        onkeydown="this.value = this.value.replace(/[^0-9]/, '');"
+        [(ngModel)]="category.popularity"
+      />
+    </mat-form-field>
+  </p>
+  <button mat-raised-button type="submit">Save</button>
+  <app-error-message [message]="message" />
+</form>
